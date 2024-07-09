@@ -13,7 +13,7 @@ function App() {
     if (e.target.className === "modal-content") setIsOpen(false);
   };
 
-  const submitHandler = (e) => {
+  const submitModal = (e) => {
     e.preventDefault();
     if (e.target.phoneNo.value.toString().length !== 10) {
       alert("Invalid phone number. Please enter a 10-digit phone number.");
@@ -35,7 +35,7 @@ function App() {
         <button onClick={openModal}>Open Form</button>
         {isOpen && (
           <div className="modal-content" onClick={closeModal}>
-            <form onSubmit={submitHandler}>
+            <form onSubmit={submitModal}>
               <h2>Fill Details</h2>
               <div className="input-group">
                 <label htmlFor="username">Username: </label>
