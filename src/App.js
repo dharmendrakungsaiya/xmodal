@@ -10,7 +10,7 @@ function App() {
 
   const closeHandler = (e) => {
     console.log(e.target.className);
-    if (e.target.className === "modal") {
+    if (e.target.className === "modal-content") {
       setIsOpen(false);
     }
   };
@@ -37,7 +37,7 @@ function App() {
       <button onClick={clickHandler}>Open Form</button>
       {isOpen && (
         <div className="modal" onClick={closeHandler}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+          <div className="modal-content">
             <form onSubmit={submitHandler}>
               <h2>Fill Details</h2>
               <div className="input-group">
