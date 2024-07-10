@@ -9,31 +9,17 @@ function App() {
   };
 
   const closeHandler = (e) => {
-    if (e.target.className === "modal") {
+    console.log(e.target.className);
+    if (e.target.className === "modal-content") {
       setIsOpen(false);
     }
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const username = e.target.username.value.trim();
-    const email = e.target.email.value.trim();
-    const phoneNo = e.target.phoneNo.value.trim();
-    const dob = new Date(e.target.dob.value);
-
-    if (!username) {
-      alert("Please fill out the Username field.");
-    } else if (!email) {
-      alert("Please fill out the Email Address field.");
-    } else if (!email.includes('@')) {
-      alert("Invalid email. Please check your email address.");
-    } else if (!phoneNo) {
-      alert("Please fill out the Phone Number field.");
-    } else if (phoneNo.length !== 10) {
+    if (e.target.phoneNo.value.toString().length !== 10) {
       alert("Invalid phone number. Please enter a 10-digit phone number.");
-    } else if (!e.target.dob.value) {
-      alert("Please fill out the Date of Birth field.");
-    } else if (dob.getTime() > Date.now()) {
+    } else if (new Date(e.target.dob.value).getTime() > Date.now()) {
       alert("Invalid date of birth. Date of birth cannot be in the future.");
     } else {
       e.target.username.value = "";
@@ -42,7 +28,9 @@ function App() {
       e.target.dob.value = "";
       setIsOpen(false);
     }
+    console.log(e.target.dob.value);
   };
+
 
   return (
     <div className="App">
@@ -50,7 +38,7 @@ function App() {
       <button onClick={clickHandler}>Open Form</button>
       {isOpen && (
         <div className="modal" onClick={closeHandler}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+          <div className="modal-content">
             <form onSubmit={submitHandler}>
               <h2>Fill Details</h2>
               <div className="input-group">
@@ -79,6 +67,7 @@ function App() {
     </div>
   );
 }
+
 
 
 export default App;
