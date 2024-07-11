@@ -1,11 +1,22 @@
-import {useState} from "react";
+import {useState,useEffect,useRef} from "react";
 import './App.css';
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
+  const inactivityTimer = useRef(null);
+
+  const resetTimer = () => {
+    if (inactivityTimer.current) {
+      clearTimeout(inactivityTimer.current);
+    }
+    inactivityTimer.current = setTimeout(() => {
+      setIsOpen(false);
+    }, 10000);
+  };
 
   const clickHandler = () => {
     setIsOpen(true);
+    resetTimer();
   };
 
   const closeHandler = (e) => {
@@ -31,15 +42,30 @@ function App() {
     console.log(e.target.dob.value);
   };
 
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener("keydown", resetTimer);
+      document.addEventListener("mousedown", resetTimer);
+    } else {
+      document.removeEventListener("keydown", resetTimer);
+      document.removeEventListener("mousedown", resetTimer);
+    }
+
+    return () => {
+      document.removeEventListener("keydown", resetTimer);
+      document.removeEventListener("mousedown", resetTimer);
+    };
+  }, [isOpen]);
+
 
   return (
     <div className="App">
       <h1>User Details Modal</h1>
-      <button onClick={clickHandler}><p>Open Form</p></button>
+      <button onClick={clickHandler}>Open Form</button>
       {isOpen && (
         <div className="modal" onClick={closeHandler}>
           <div className="modal-content">
-            <form onSubmit={submitHandler}>
+            <form onSubmit={submitHandler} onChange={resetTimer}>
               <h2>Fill Details</h2>
               <div className="input-group">
                 <label htmlFor="username">Username: </label>
