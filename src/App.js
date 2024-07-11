@@ -35,7 +35,7 @@ function App() {
   return (
     <div className="App">
       <h1>User Details Modal</h1>
-      <button onClick={clickHandler}>Open Form</button>
+      <button onClick={clickHandler}><p>Open Form</p></button>
       {isOpen && (
         <div className="modal" onClick={closeHandler}>
           <div className="modal-content">
