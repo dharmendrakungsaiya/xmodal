@@ -1,4 +1,5 @@
 import {useState} from "react";
+import "./App.css";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,6 +29,7 @@ function App() {
   };
 
   return (
+    
       <div className="modal">
         <h1>User Details Modal</h1>
         <button onClick={clickHandler}>Open Form</button>
@@ -61,6 +63,7 @@ function App() {
           
         )}
       </div>
+    
   );
 }
 
