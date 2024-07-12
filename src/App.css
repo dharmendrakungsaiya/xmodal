@@ -1,28 +1,26 @@
+.App{
+  text-align: center;
+  
+}
 .modal {
   width: 100%;
   height: 100%;
-  background-color: blue;
+  background-color: white;
   text-align: center;
-  font-size: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
-
-.modal-wrapper {
+.modal-content {
+  border: 1px solid gray;
+  margin: 0 auto;
   background-color: rgba(0, 0, 0, 0.3);
   width: 100%;
   height: 100%;
   z-index: 10;
   position: fixed;
   top: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  place-items: center;
 }
-
-.modal-content {
+form {
   background-color: white;
   padding: 20px;
   display: flex;
@@ -33,13 +31,11 @@
   margin: 0 auto;
   border-radius: 5px;
 }
-
 .input-group {
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
-
 button {
   background-color: skyblue;
   border: none;

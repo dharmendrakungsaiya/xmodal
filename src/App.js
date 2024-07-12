@@ -1,17 +1,16 @@
 import {useState} from "react";
+import "./App.css";
 
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
-
   const clickHandler = () => {
     setIsOpen(true);
   };
 
   const closeHandler = (e) => {
-    if (e.target.className === "modal-wrapper") {
-      setIsOpen(false);
-    }
+    console.log(e.target.className);
+    if (e.target.className === "modal-content") setIsOpen(false);
   };
 
   const submitHandler = (e) => {
@@ -27,21 +26,23 @@ function App() {
       e.target.dob.value = "";
       setIsOpen(false);
     }
+    console.log(e.target.dob.value);
   };
 
   return (
-    <div className="modal">
-      <h1>User Details Modal</h1>
-      <button onClick={clickHandler}>Open Form</button>
-
-      {isOpen && (
-        <div className="modal-wrapper" onClick={closeHandler}>
-          <div className="modal-content">
+    
+      <div className="modal">
+        <h1>User Details Modal</h1>
+        <button onClick={clickHandler}>Open Form</button>
+        
+        {isOpen && (
+          
+          <div className="modal-content" onClick={closeHandler}>
             <form onSubmit={submitHandler}>
               <h2>Fill Details</h2>
               <div className="input-group">
                 <label htmlFor="username">Username: </label>
-                <input type="text" name="username" id="username" required />
+                <input type="text" name="username" id="username" required/>
               </div>
               <div className="input-group">
                 <label htmlFor="email">Email Address:</label>
@@ -60,12 +61,12 @@ function App() {
               </button>
             </form>
           </div>
-        </div>
-      )}
-    </div>
+          
+        )}
+      </div>
+    
   );
 }
-
 
 
 export default App;
