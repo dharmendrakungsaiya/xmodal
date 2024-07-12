@@ -29,7 +29,6 @@ function App() {
   };
 
   return (
-    <div className="App">
       <div className="modal">
         <h1>User Details Modal</h1>
         <button onClick={clickHandler}>Open Form</button>
@@ -62,7 +61,6 @@ function App() {
           </div>
           
         )}
-      </div>
       </div>
   );
 }
