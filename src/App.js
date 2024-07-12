@@ -1,29 +1,15 @@
-import {useState,useEffect,useRef} from "react";
+import {useState} from "react";
 import './App.css';
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
-  const inactivityTimer = useRef(null);
-
-  const resetTimer = () => {
-    if (inactivityTimer.current) {
-      clearTimeout(inactivityTimer.current);
-    }
-    inactivityTimer.current = setTimeout(() => {
-      setIsOpen(false);
-    }, 10000);
-  };
-
   const clickHandler = () => {
     setIsOpen(true);
-    resetTimer();
   };
 
   const closeHandler = (e) => {
     console.log(e.target.className);
-    if (e.target.className === "modal-content") {
-      setIsOpen(false);
-    }
+    if (e.target.className === "modal-content") setIsOpen(false);
   };
 
   const submitHandler = (e) => {
@@ -37,39 +23,22 @@ function App() {
       e.target.email.value = "";
       e.target.phoneNo.value = "";
       e.target.dob.value = "";
-      setIsOpen(false);
     }
     console.log(e.target.dob.value);
   };
 
-  useEffect(() => {
-    if (isOpen) {
-      document.addEventListener("keydown", resetTimer);
-      document.addEventListener("mousedown", resetTimer);
-    } else {
-      document.removeEventListener("keydown", resetTimer);
-      document.removeEventListener("mousedown", resetTimer);
-    }
-
-    return () => {
-      document.removeEventListener("keydown", resetTimer);
-      document.removeEventListener("mousedown", resetTimer);
-    };
-  }, [isOpen]);
-
-
   return (
     <div className="App">
-      <h1>User Details Modal</h1>
-      <button onClick={clickHandler}>Open Form</button>
-      {isOpen && (
-        <div className="modal" onClick={closeHandler}>
-          <div className="modal-content">
-            <form onSubmit={submitHandler} onChange={resetTimer}>
+      <div className="modal">
+        <h1>User Details Modal</h1>
+        <button onClick={clickHandler}>Open Form</button>
+        {isOpen && (
+          <div className="modal-content" onClick={closeHandler}>
+            <form onSubmit={submitHandler}>
               <h2>Fill Details</h2>
               <div className="input-group">
                 <label htmlFor="username">Username: </label>
-                <input type="text" name="username" id="username" required />
+                <input type="text" name="username" id="username" required/>
               </div>
               <div className="input-group">
                 <label htmlFor="email">Email Address:</label>
@@ -81,19 +50,18 @@ function App() {
               </div>
               <div className="input-group">
                 <label htmlFor="dob">Date of Birth:</label>
-                <input type="date" name="dob" id="dob" required />
+                <input type="date" name="dob" id="dob" />
               </div>
               <button type="submit" className="submit-button">
                 Submit
               </button>
             </form>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }
-
 
 
 export default App;
