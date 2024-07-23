@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import Modal from "./Modal";
+import "./Modal.css";
 
 const XModal = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
